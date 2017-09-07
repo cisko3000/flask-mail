@@ -5,4 +5,8 @@ Flask-Mail
 
 Flask-Mail is a Flask extension providing simple email sending capabilities.
 
+How is this fork different?
+===========================
+This fork import werkzeug.local.LocalProxy which is used in sanitize_address() method.
+
 Documentation: http://packages.python.org/Flask-Mail
