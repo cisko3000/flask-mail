@@ -29,6 +29,7 @@ from email.header import Header
 from email.utils import formatdate, formataddr, make_msgid, parseaddr
 from contextlib import contextmanager
 
+from werkzeug.local import LocalProxy
 from flask import current_app
 
 PY3 = sys.version_info[0] == 3
@@ -102,7 +103,10 @@ def sanitize_subject(subject, encoding='utf-8'):
 def sanitize_address(addr, encoding='utf-8'):
     if isinstance(addr, string_types):
         addr = parseaddr(force_text(addr))
+    elif isinstance(addr, LocalProxy):
+        addr = parseaddr(force_text(addr))
     nm, addr = addr
+    
 
     try:
         nm = Header(nm, encoding).encode()
